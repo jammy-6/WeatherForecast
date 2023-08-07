@@ -1,6 +1,7 @@
 ﻿#ifndef WEATHERDATE_H
 #define WEATHERDATE_H
 #include <QJsonObject>
+#include <QJsonArray>
 class Today{
 public:
     QString date;
@@ -18,6 +19,7 @@ public:
     QString notice;
     Today();
     Today(const QJsonObject &);
+    Today & operator=(const QJsonObject&);
 };
 
 class Forecast{
@@ -27,8 +29,10 @@ public:
     QString low;
     QString aqi;
     QString type;
+    QString weather_url;
     Forecast();
     Forecast(const QJsonObject &);
+    Forecast & operator=(const QJsonObject&);
 };
 
 #endif // WEATHERDATE_H

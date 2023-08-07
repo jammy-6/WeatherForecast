@@ -294,6 +294,7 @@ Makefile: weather_forecast.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qm
 		weather_forecast.pro \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgets.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Gui.prl \
+		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Network.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Core.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\qtmain.prl \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\build_pass.prf \
@@ -302,6 +303,7 @@ Makefile: weather_forecast.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qm
 		weatherIcons\weatypeico.qrc \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.prl \
+		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Cored.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\qtmaind.prl
 	$(QMAKE) -o Makefile weather_forecast.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -515,6 +517,7 @@ Makefile: weather_forecast.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qm
 weather_forecast.pro:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgets.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Gui.prl:
+..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Network.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Core.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\qtmain.prl:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\build_pass.prf:
@@ -523,6 +526,7 @@ images\images.qrc:
 weatherIcons\weatypeico.qrc:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.prl:
+..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Cored.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\qtmaind.prl:
 qmake: FORCE

@@ -130,7 +130,7 @@ background-color: rgb(255, 255, 255, 0);</string>
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_1">
        <property name="styleSheet">
         <string notr="true">
 color: rgb(255, 255, 255);</string>
@@ -186,7 +186,7 @@ color: rgb(255, 255, 255);</string>
       </widget>
      </item>
      <item row="0" column="1" colspan="2">
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="shidu">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -196,7 +196,7 @@ color: rgb(255, 255, 255);</string>
       </widget>
      </item>
      <item row="1" column="1" colspan="2">
-      <widget class="QLabel" name="label_6">
+      <widget class="QLabel" name="wendu">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -206,7 +206,7 @@ color: rgb(255, 255, 255);</string>
       </widget>
      </item>
      <item row="2" column="1" colspan="2">
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="pm2_5">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -216,7 +216,7 @@ color: rgb(255, 255, 255);</string>
       </widget>
      </item>
      <item row="3" column="1" colspan="2">
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="fengli">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -326,6 +326,9 @@ color: rgb(255, 255, 255);</string>
      </item>
      <item row="4" column="0" rowspan="2">
       <widget class="QLabel" name="typeicon1">
+       <property name="styleSheet">
+        <string notr="true">background-image: url(https://img.jumdata.com/weather-icon/d00.png);</string>
+       </property>
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -771,7 +774,7 @@ color: rgb(110, 255, 0);</string>
      <string>9°</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_10">
+   <widget class="QLabel" name="notice_lb">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -821,7 +824,7 @@ color: rgb(110, 255, 0);</string>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="ganmao">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>

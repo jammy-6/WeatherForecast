@@ -12,6 +12,9 @@
 #include <map>
 #include <QDebug>
 #include <iostream>
+#include <string.h>
+
+using namespace std;
 class WeatherTool{
 public:
     WeatherTool(){
@@ -34,12 +37,12 @@ public:
                 }
             }
         }
-        qDebug()<<m_city2code[u8"广州"];
+
 
     }
 
 
-    const QString & operator[](const QString &cityname){
+    QString  operator[](const QString &cityname){
         auto it = m_city2code.find(cityname);
         if(it==m_city2code.end()){
             it = m_city2code.find(cityname+u8"市");
@@ -59,6 +62,12 @@ private:
     std::map<QString,QString> m_city2code;
 
 };
-
+//unsigned char CharToHex(unsigned char x)
+//{
+//    return (unsigned char)(x > 9 ? x + 55 : x + 48);
+//}
+// URL encode
+void UrlEncode(const string &src, string &str_encode);
+QString date2weekday(int dayOfWeekInt);
 
 #endif // WEATHER_TOOL_H

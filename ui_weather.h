@@ -32,14 +32,14 @@ public:
     QFrame *line_3;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
-    QLabel *label_1;
     QLabel *label_2;
-    QLabel *label_3;
     QLabel *label_4;
+    QLabel *fengli;
+    QLabel *label_1;
     QLabel *shidu;
     QLabel *wendu;
     QLabel *pm2_5;
-    QLabel *fengli;
+    QLabel *label_3;
     QWidget *gridLayoutWidget_2;
     QGridLayout *gridLayout_2;
     QLabel *temperature_max5;
@@ -83,7 +83,7 @@ public:
     QLabel *type6;
     QLabel *typeicon6;
     QLabel *temperature_max6;
-    QLabel *label_37;
+    QLabel *line_chart;
     QLabel *temperature_min6;
     QWidget *gridLayoutWidget_3;
     QGridLayout *gridLayout_3;
@@ -98,7 +98,7 @@ public:
     QWidget *gridLayoutWidget_4;
     QGridLayout *gridLayout_4;
     QLabel *label_11;
-    QLabel *label_12;
+    QLabel *sunarc;
     QTextEdit *ganmao;
     QToolButton *search_btn;
     QToolButton *refresh_btn;
@@ -153,23 +153,15 @@ public:
         line_2->setFrameShadow(QFrame::Sunken);
         line_3 = new QFrame(widget);
         line_3->setObjectName(QString::fromUtf8("line_3"));
-        line_3->setGeometry(QRect(10, 353, 351, 1));
+        line_3->setGeometry(QRect(10, 345, 351, 1));
         line_3->setFrameShape(QFrame::HLine);
         line_3->setFrameShadow(QFrame::Sunken);
         gridLayoutWidget = new QWidget(widget);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(10, 190, 351, 161));
+        gridLayoutWidget->setGeometry(QRect(10, 190, 321, 151));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        label_1 = new QLabel(gridLayoutWidget);
-        label_1->setObjectName(QString::fromUtf8("label_1"));
-        label_1->setStyleSheet(QString::fromUtf8("\n"
-"color: rgb(255, 255, 255);"));
-        label_1->setAlignment(Qt::AlignCenter);
-
-        gridLayout->addWidget(label_1, 0, 0, 1, 1);
-
         label_2 = new QLabel(gridLayoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setStyleSheet(QString::fromUtf8("\n"
@@ -178,14 +170,6 @@ public:
 
         gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
-        label_3 = new QLabel(gridLayoutWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setStyleSheet(QString::fromUtf8("\n"
-"color: rgb(255, 255, 255);"));
-        label_3->setAlignment(Qt::AlignCenter);
-
-        gridLayout->addWidget(label_3, 2, 0, 1, 1);
-
         label_4 = new QLabel(gridLayoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setStyleSheet(QString::fromUtf8("\n"
@@ -193,6 +177,20 @@ public:
         label_4->setAlignment(Qt::AlignCenter);
 
         gridLayout->addWidget(label_4, 3, 0, 1, 1);
+
+        fengli = new QLabel(gridLayoutWidget);
+        fengli->setObjectName(QString::fromUtf8("fengli"));
+        fengli->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(fengli, 3, 1, 1, 2);
+
+        label_1 = new QLabel(gridLayoutWidget);
+        label_1->setObjectName(QString::fromUtf8("label_1"));
+        label_1->setStyleSheet(QString::fromUtf8("\n"
+"color: rgb(255, 255, 255);"));
+        label_1->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(label_1, 0, 0, 1, 1);
 
         shidu = new QLabel(gridLayoutWidget);
         shidu->setObjectName(QString::fromUtf8("shidu"));
@@ -212,11 +210,13 @@ public:
 
         gridLayout->addWidget(pm2_5, 2, 1, 1, 2);
 
-        fengli = new QLabel(gridLayoutWidget);
-        fengli->setObjectName(QString::fromUtf8("fengli"));
-        fengli->setAlignment(Qt::AlignCenter);
+        label_3 = new QLabel(gridLayoutWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setStyleSheet(QString::fromUtf8("\n"
+"color: rgb(255, 255, 255);"));
+        label_3->setAlignment(Qt::AlignCenter);
 
-        gridLayout->addWidget(fengli, 3, 1, 1, 2);
+        gridLayout->addWidget(label_3, 2, 0, 1, 1);
 
         gridLayoutWidget_2 = new QWidget(widget);
         gridLayoutWidget_2->setObjectName(QString::fromUtf8("gridLayoutWidget_2"));
@@ -232,6 +232,7 @@ public:
 
         datenum6 = new QLabel(gridLayoutWidget_2);
         datenum6->setObjectName(QString::fromUtf8("datenum6"));
+        datenum6->setAlignment(Qt::AlignCenter);
 
         gridLayout_2->addWidget(datenum6, 1, 5, 1, 1);
 
@@ -370,6 +371,7 @@ public:
 
         datecn6 = new QLabel(gridLayoutWidget_2);
         datecn6->setObjectName(QString::fromUtf8("datecn6"));
+        datecn6->setAlignment(Qt::AlignCenter);
 
         gridLayout_2->addWidget(datecn6, 0, 5, 1, 1);
 
@@ -465,11 +467,11 @@ public:
 
         gridLayout_2->addWidget(temperature_max6, 6, 5, 1, 1);
 
-        label_37 = new QLabel(gridLayoutWidget_2);
-        label_37->setObjectName(QString::fromUtf8("label_37"));
-        label_37->setAlignment(Qt::AlignCenter);
+        line_chart = new QLabel(gridLayoutWidget_2);
+        line_chart->setObjectName(QString::fromUtf8("line_chart"));
+        line_chart->setAlignment(Qt::AlignCenter);
 
-        gridLayout_2->addWidget(label_37, 7, 0, 2, 6);
+        gridLayout_2->addWidget(line_chart, 7, 0, 2, 6);
 
         temperature_min6 = new QLabel(gridLayoutWidget_2);
         temperature_min6->setObjectName(QString::fromUtf8("temperature_min6"));
@@ -523,10 +525,10 @@ public:
         temperature->setStyleSheet(QString::fromUtf8("font: 36pt \"Microsoft YaHei UI\";"));
         notice_lb = new QLabel(widget);
         notice_lb->setObjectName(QString::fromUtf8("notice_lb"));
-        notice_lb->setGeometry(QRect(10, 160, 131, 19));
+        notice_lb->setGeometry(QRect(10, 160, 321, 19));
         gridLayoutWidget_4 = new QWidget(widget);
         gridLayoutWidget_4->setObjectName(QString::fromUtf8("gridLayoutWidget_4"));
-        gridLayoutWidget_4->setGeometry(QRect(10, 350, 334, 102));
+        gridLayoutWidget_4->setGeometry(QRect(10, 350, 321, 102));
         gridLayout_4 = new QGridLayout(gridLayoutWidget_4);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         gridLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -535,16 +537,16 @@ public:
 
         gridLayout_4->addWidget(label_11, 0, 0, 1, 1);
 
-        label_12 = new QLabel(gridLayoutWidget_4);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        sunarc = new QLabel(gridLayoutWidget_4);
+        sunarc->setObjectName(QString::fromUtf8("sunarc"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(label_12->sizePolicy().hasHeightForWidth());
-        label_12->setSizePolicy(sizePolicy);
-        label_12->setMinimumSize(QSize(150, 100));
+        sizePolicy.setHeightForWidth(sunarc->sizePolicy().hasHeightForWidth());
+        sunarc->setSizePolicy(sizePolicy);
+        sunarc->setMinimumSize(QSize(150, 100));
 
-        gridLayout_4->addWidget(label_12, 0, 2, 1, 1);
+        gridLayout_4->addWidget(sunarc, 0, 2, 1, 1);
 
         ganmao = new QTextEdit(gridLayoutWidget_4);
         ganmao->setObjectName(QString::fromUtf8("ganmao"));
@@ -553,6 +555,9 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(ganmao->sizePolicy().hasHeightForWidth());
         ganmao->setSizePolicy(sizePolicy1);
+        ganmao->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 0);\n"
+"color: rgb(255, 255, 255);\n"
+""));
 
         gridLayout_4->addWidget(ganmao, 0, 1, 1, 1);
 
@@ -576,19 +581,19 @@ public:
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Widget", nullptr));
         city_search->setText(QCoreApplication::translate("Widget", "\345\237\216\345\270\202", nullptr));
         datelb->setText(QCoreApplication::translate("Widget", "2023-08-02", nullptr));
-        label_1->setText(QCoreApplication::translate("Widget", "\346\271\277\345\272\246", nullptr));
         label_2->setText(QCoreApplication::translate("Widget", "\346\270\251\345\272\246", nullptr));
-        label_3->setText(QCoreApplication::translate("Widget", "PM2.5", nullptr));
         label_4->setText(QCoreApplication::translate("Widget", "\351\243\216\345\212\233", nullptr));
+        fengli->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        label_1->setText(QCoreApplication::translate("Widget", "\346\271\277\345\272\246", nullptr));
         shidu->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         wendu->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         pm2_5->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
-        fengli->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        label_3->setText(QCoreApplication::translate("Widget", "PM2.5", nullptr));
         temperature_max5->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         datenum6->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
-        quality3->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        quality3->setText(QString());
         temperature_min2->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
-        quality2->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        quality2->setText(QString());
         type2->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         typeicon3->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         datenum3->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
@@ -604,12 +609,12 @@ public:
         type3->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         temperature_min3->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         temperature_max2->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
-        quality4->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        quality4->setText(QString());
         typeicon4->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         temperature_max1->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
-        quality5->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        quality5->setText(QString());
         datecn6->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
-        quality1->setText(QCoreApplication::translate("Widget", "\344\274\230\350\264\250", nullptr));
+        quality1->setText(QString());
         datecn1->setText(QCoreApplication::translate("Widget", "\346\230\250\345\244\251", nullptr));
         datecn3->setText(QCoreApplication::translate("Widget", "\346\230\216\345\244\251", nullptr));
         datenum4->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
@@ -621,11 +626,11 @@ public:
         datecn4->setText(QCoreApplication::translate("Widget", "\345\221\250\344\272\224", nullptr));
         type1->setText(QCoreApplication::translate("Widget", "\351\230\264", nullptr));
         datenum1->setText(QCoreApplication::translate("Widget", "01/01", nullptr));
-        quality6->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        quality6->setText(QString());
         type6->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         typeicon6->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         temperature_max6->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
-        label_37->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        line_chart->setText(QString());
         temperature_min6->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
         location_icon->setText(QString());
         location_text->setText(QCoreApplication::translate("Widget", "\351\225\277\346\262\231", nullptr));
@@ -636,7 +641,7 @@ public:
         temperature->setText(QCoreApplication::translate("Widget", "9\302\260", nullptr));
         notice_lb->setText(QCoreApplication::translate("Widget", "\345\244\232\347\251\277\347\202\271\350\241\243\346\234\215", nullptr));
         label_11->setText(QCoreApplication::translate("Widget", "<html><head/><body><p>\346\204\237<br/>\345\206\222<br/>\346\214\207<br/>\346\225\260</p></body></html>", nullptr));
-        label_12->setText(QCoreApplication::translate("Widget", "TextLabel", nullptr));
+        sunarc->setText(QString());
         search_btn->setText(QString());
         refresh_btn->setText(QString());
     } // retranslateUi

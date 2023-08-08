@@ -292,6 +292,7 @@ Makefile: weather_forecast.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qm
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\yacc.prf \
 		..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\lex.prf \
 		weather_forecast.pro \
+		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Charts.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgets.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Gui.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Network.prl \
@@ -301,6 +302,7 @@ Makefile: weather_forecast.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qm
 		icons\icons.qrc \
 		images\images.qrc \
 		weatherIcons\weatypeico.qrc \
+		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Chartsd.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.prl \
 		..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.prl \
@@ -515,6 +517,7 @@ Makefile: weather_forecast.pro ..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qm
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\yacc.prf:
 ..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\lex.prf:
 weather_forecast.pro:
+..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Charts.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgets.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Gui.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Network.prl:
@@ -524,6 +527,7 @@ weather_forecast.pro:
 icons\icons.qrc:
 images\images.qrc:
 weatherIcons\weatypeico.qrc:
+..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Chartsd.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Widgetsd.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Guid.prl:
 ..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.prl:

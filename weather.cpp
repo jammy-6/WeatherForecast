@@ -3,7 +3,7 @@
 #include <string>
 #include <QTimer>
 using std::string;
-
+using namespace QtCharts;
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
@@ -43,6 +43,14 @@ Widget::Widget(QWidget *parent)
     forecast_url = u8"https://jmweather.market.alicloudapi.com/weather/query/15d";
     city=u8"广州";
     getWeatherInfo();
+
+    //安装事件过滤器
+    ui->sunarc->installEventFilter(this);
+    ui->line_chart->installEventFilter(this);
+    timer=new QTimer(ui->sunarc);
+    connect(timer,SIGNAL(timeout()),ui->sunarc,SLOT(update()));
+    timer->start(1000);
+
 
 }
 
@@ -107,7 +115,35 @@ QImage Widget::getImage(const QString &url){
 }
 
 
+void Widget::paintSunSetUI(){
+    //绘制底部直线以及圆弧
+    QPainter painter;
+    painter.setPen(Qt::yellow);
+    painter.begin(ui->sunarc);
 
+    painter.drawLine(ui->sunarc->width()*0.1,ui->sunarc->height()*0.7,ui->sunarc->width()*0.9,ui->sunarc->height()*0.7);
+    QRect rect(ui->sunarc->width()*0.1,ui->sunarc->height()*0.72,ui->sunarc->width()*0.8,ui->sunarc->height()*0.28);
+    QTime cur_time = QDateTime::currentDateTime().time();
+    QTime sunrise = QTime::fromString(today.sunrise,"HH:mm");
+    QTime sunset = QTime::fromString(today.sunset,"HH:mm");
+    painter.drawText(rect,Qt::AlignCenter,u8"日出日落");
+    painter.drawText(rect,Qt::AlignLeft,sunrise.toString("HH:mm"));
+    painter.drawText(rect,Qt::AlignRight,sunset.toString("HH:mm"));
+    rect = QRect(ui->sunarc->width()*0.1, 0 ,ui->sunarc->width()*0.8,ui->sunarc->height()*1.4);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.drawArc(rect,0*16,180*16);
+
+    int sunset_total_minutes = sunset.hour()*60+sunset.minute();
+    int sunrise_total_minutes = sunrise.hour()*60+sunrise.minute();
+    int cur_minutes = cur_time.hour()*60+cur_time.minute();
+
+    double start_angle = (sunset_total_minutes-cur_minutes)*1.0/(sunset_total_minutes-sunrise_total_minutes)*180 *16;
+    double span_angle = (cur_minutes-sunrise_total_minutes)*1.0/(sunset_total_minutes-sunrise_total_minutes)*180*16;
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255, 85, 0, 100));
+    painter.drawPie(rect,start_angle,span_angle);
+    painter.end();
+}
 
 //设置UI界面信息
 void Widget::setUI(){
@@ -137,6 +173,8 @@ void Widget::setUI(){
         if(i==0)
             ui->type_icon->setPixmap(QPixmap::fromImage(image));
     }
+    ui->line_chart->update();
+
 }
 
 void Widget::getWeatherInfo(){
@@ -167,6 +205,54 @@ void Widget::getWeatherInfo(){
 
 }
 
+void Widget::paintLineChart(){
+    QList<double> low_list;
+    QList<double> high_list;
+    for(int i=0;i<6;i++){
+        low_list<<forecast[i].low.toDouble();
+        high_list<<forecast[i].high.toDouble();
+    }
+    auto it = std::min_element(low_list.begin(),low_list.end());
+    double min = *it;
+    it = std::max_element(high_list.begin(),high_list.end());
+    double max = *it;
+    double block_width = ui->line_chart->width()/6;
+
+    if(int(min)){
+        qDebug()<<min<<max;
+        qDebug()<<u8"开始画直线图";
+        QPainter painter;
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setPen(Qt::yellow);
+        painter.begin(ui->line_chart);
+        //开始画图
+        QPoint prev_low(block_width/2,(1.0-((low_list[0]-min)/(max-min))) * ui->line_chart->height()*0.95);
+        QPoint prev_high(block_width/2,(1.0-((high_list[0]-min)/(max-min))) * ui->line_chart->height()*0.95);
+        painter.setBrush(Qt::red);
+        painter.drawEllipse(prev_low, 2, 2);
+        painter.drawEllipse(prev_high, 2, 2);
+
+        for(int i=1;i<low_list.size();i++){
+
+            QPoint cur_low = QPoint(prev_low.x()+block_width,(1.0-((low_list[i]-min)/(max-min))) * ui->line_chart->height()*0.95);
+            painter.drawLine(prev_low,cur_low);
+            prev_low=cur_low;
+
+            QPoint cur_high = QPoint(prev_high.x()+block_width,(1.0-((high_list[i]-min)/(max-min))+0.01) * ui->line_chart->height()*0.95);
+            painter.drawLine(prev_high,cur_high);
+            prev_high=cur_high;
+
+            painter.drawEllipse(cur_low, 2, 2);
+            painter.drawEllipse(cur_high, 2, 2);
+
+        }
+        painter.end();
+    }
+
+
+
+}
+
 
 
 //右键弹出菜单
@@ -193,5 +279,33 @@ Widget::~Widget()
 void Widget::exit_fun(){
 
     qApp->exit(0);
+}
+
+
+
+bool Widget::eventFilter(QObject *watched, QEvent *event){
+    if(watched==ui->sunarc&&event->type()==QEvent::Paint){
+        paintSunSetUI();
+    }
+    if(watched==ui->line_chart&&event->type()==QEvent::Paint){
+        paintLineChart();
+    }
+    return QObject::eventFilter(watched,event);
+}
+
+void Widget::on_search_btn_clicked(bool checked)
+{
+    QString temp_city = ui->city_search->text();
+    if(tool[temp_city]!="000000000")
+        city = temp_city;
+        getWeatherInfo();
+
+
+}
+
+
+void Widget::on_refresh_btn_clicked(bool checked)
+{
+    getWeatherInfo();
 }
 

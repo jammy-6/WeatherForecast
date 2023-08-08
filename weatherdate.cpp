@@ -10,8 +10,8 @@ Today::Today(){
     pm25 = u8"无数据";
     quality = u8"无数据";
     shidu = u8"无数据";
-    sunrise = "00:00";
-    sunset = "00:00";
+    sunrise = "00:01";
+    sunset = "23:59";
     wendu = "null";
     type = u8"无数据";
 

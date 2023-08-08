@@ -14,6 +14,15 @@
 #include <QNetworkReply>
 #include <QDate>
 #include <QHttpMultiPart>
+#include <QPainter>
+#include <QPen>
+#include <QChart>
+#include <QLineSeries>
+#include <QChartView>
+#include <QValueAxis>
+#include <QScrollArea>
+#include <algorithm>
+#include <QTimer>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -25,7 +34,7 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     void contextMenuEvent(QContextMenuEvent *event);
-
+    virtual bool eventFilter(QObject *watched, QEvent *event);
     ~Widget();
     QPoint cur_pos;
 protected:
@@ -33,11 +42,17 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void getWeatherInfo();
     void parseJson(const QJsonObject&);
+    void paintSunSetUI();
+    void paintLineChart();
     void setUI();
     QImage getImage(const QString &url);
 private slots:
     void exit_fun();
     void parseRequest(QNetworkReply *);
+    void on_search_btn_clicked(bool checked);
+
+    void on_refresh_btn_clicked(bool checked);
+
 private:
     Ui::Widget *ui;
 
@@ -68,5 +83,6 @@ private:
     QDate date;
     Today today;
     Forecast forecast[6];
+    QTimer *timer;
 };
 #endif // WEATHER_H

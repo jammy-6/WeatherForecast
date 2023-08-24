@@ -11,52 +11,15 @@
 #include <QString>
 #include <map>
 #include <QDebug>
-#include <iostream>
 #include <string.h>
 
 using namespace std;
 class WeatherTool{
 public:
-    WeatherTool(){
-        //开始解析资源文件
-        QString filepath = QCoreApplication::applicationDirPath();
-        filepath += u8"/city_info.json";
-        QFile file = QFile(filepath);
-        if(file.open(QIODevice::ReadOnly|QIODevice::Text)){
-            QByteArray data = file.readAll();
-            file.close();
-            QJsonParseError error;
-            QJsonDocument jsonDoc = QJsonDocument::fromJson(data,&error);
-            QJsonValue city_infos = jsonDoc[u8"result"];
-            QJsonArray city_infos_arr = city_infos.toArray();
-            for(int i=0;i<city_infos_arr.size();i++){
-                QString city_name = city_infos_arr.at(i).toObject().value(u8"city").toString();
-                QString city_code = city_infos_arr.at(i).toObject().value(u8"citycode").toString();
-                if(city_code!=u8"null"){
-                    m_city2code[city_name] = city_code;
-                }
-            }
-        }
+    WeatherTool();
 
 
-    }
-
-
-    QString  operator[](const QString &cityname){
-        auto it = m_city2code.find(cityname);
-        if(it==m_city2code.end()){
-            it = m_city2code.find(cityname+u8"市");
-        }
-        if(it==m_city2code.end()){
-            it = m_city2code.find(cityname+u8"县");
-        }
-        if(it!=m_city2code.end()){
-            return it->second;
-        }
-        else{
-            return u8"00000000";
-        }
-    }
+    QString  operator[](const QString &cityname);
 
 private:
     std::map<QString,QString> m_city2code;

@@ -23,6 +23,8 @@
 #include <QScrollArea>
 #include <algorithm>
 #include <QTimer>
+#include <QMutex>
+#include <functional>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -45,28 +47,30 @@ protected:
     void paintSunSetUI();
     void paintLineChart();
     void setUI();
-    QImage getImage(const QString &url);
+
+
 private slots:
     void exit_fun();
     void parseRequest(QNetworkReply *);
     void on_search_btn_clicked(bool checked);
-
     void on_refresh_btn_clicked(bool checked);
-
+    void setImage(QNetworkReply *reply,int index);
 private:
     Ui::Widget *ui;
 
     //退出菜单
     QMenu *menu;
     QAction *exit;
-
+    QMutex mutex;
     //url请求数据
     QNetworkAccessManager *manager;
+    QNetworkAccessManager *image_manager[6];
     QString province;
     QString city,last_city;
     QString area;
     QString today_url;
     QString forecast_url;
+    QImage images[6];
 
 
     //ui控件
@@ -80,9 +84,11 @@ private:
 
     //工具类
     WeatherTool tool;
+    //UI类
     QDate date;
     Today today;
     Forecast forecast[6];
+    //定时刷新
     QTimer *timer;
 };
 #endif // WEATHER_H

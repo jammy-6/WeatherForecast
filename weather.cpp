@@ -8,17 +8,20 @@ Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
+
+
     ui->setupUi(this);
     //设置无边框
     setWindowFlag(Qt::FramelessWindowHint);
     setFixedSize(width(),height());
+
     //添加退出功能
     menu = new QMenu(ui->widget);
     exit = new QAction(QIcon(":/weatherIco/close.ico"),QString("exit"),menu);
     menu->addAction(exit);
     connect(exit,SIGNAL(triggered(bool)),this,SLOT(exit_fun()));
 
-    ui->city_search->setStyleSheet("QLineEdit{border: 1px solid gray; border-radius: 4px; background:argb(47, 47, 47, 130); color:rgb(255, 255, 255);} QLineEdit:hover{border-color:rgb(101, 255, 106); }");
+    ui->city_search->setStyleSheet("QLineEdit{border: 1px solid gray; border-radius: 4px; background:argb(47, 47, 47, 130); color:rgb(0, 0, 0);} QLineEdit:hover{border-color:rgb(101, 255, 106); }");
 
     //添加ui控件
     forecast_week_list << ui->datecn1 << ui->datecn2 << ui->datecn3 << ui->datecn4 << ui->datecn5 << ui->datecn6;
@@ -38,6 +41,13 @@ Widget::Widget(QWidget *parent)
     WeatherTool tool;
 
     manager = new QNetworkAccessManager(this);
+    for(int i=0;i<6;i++){
+        image_manager[i] =  new QNetworkAccessManager(this);
+        // 连接信号与槽，处理请求完成后的响应
+        connect(image_manager[i],&QNetworkAccessManager::finished,
+                this,
+                bind(&Widget::setImage,this,std::placeholders::_1,i));
+    }
     connect(manager,SIGNAL(finished(QNetworkReply*)),this,SLOT(parseRequest(QNetworkReply*)));
     today_url = u8"https://jisutqybmf.market.alicloudapi.com/weather/query";
     forecast_url = u8"https://jmweather.market.alicloudapi.com/weather/query/15d";
@@ -50,6 +60,7 @@ Widget::Widget(QWidget *parent)
     timer=new QTimer(ui->sunarc);
     connect(timer,SIGNAL(timeout()),ui->sunarc,SLOT(update()));
     timer->start(1000);
+
 
 
 }
@@ -89,29 +100,21 @@ void Widget::parseRequest(QNetworkReply * reply){
     parseJson(jsonDoc.object());
 
 }
-QImage Widget::getImage(const QString &url){
-    // 创建QNetworkAccessManager对象
-    QNetworkAccessManager image_manager;
 
-    // 创建一个事件循环
-    QEventLoop loop;
 
-    // 发送GET请求
-    image_manager.get(QNetworkRequest(QUrl(url)));
-    QImage image;
-    // 连接信号与槽，处理请求完成后的响应
-    connect(&image_manager,&QNetworkAccessManager::finished,[&](QNetworkReply* reply){
-        if (reply->error() == QNetworkReply::NoError) {
-            // 获取响应数据
-            QByteArray imageData = reply->readAll();
-            // 将数据转换为QImage
-            image.loadFromData(imageData);
-            loop.quit();
-        }
-    });
-    loop.exec();
-    return image;
+void Widget::setImage(QNetworkReply *reply,int index){
+    if (reply->error() == QNetworkReply::NoError) {
+        QImage image;
+        // 获取响应数据
+        QByteArray imageData = reply->readAll();
+        // 将数据转换为QImage
+        image.loadFromData(imageData);
 
+        forecast_typeIco_list[index]->setPixmap(QPixmap::fromImage(image));
+        if(0==index)
+            ui->type_icon->setPixmap(QPixmap::fromImage(image));
+    }
+    reply->deleteLater();
 }
 
 
@@ -167,11 +170,9 @@ void Widget::setUI(){
         forecast_low_list[i]->setText(forecast[i].low);
         forecast_high_list[i]->setText(forecast[i].high);
         forecast_type_list[i]->setText(forecast[i].type);
-        QImage image = getImage(forecast[i].weather_url);
         forecast_typeIco_list[i]->setScaledContents(true);
-        forecast_typeIco_list[i]->setPixmap(QPixmap::fromImage(image));
-        if(i==0)
-            ui->type_icon->setPixmap(QPixmap::fromImage(image));
+        //设置天气图标ICON
+        image_manager[i]->get(QNetworkRequest(QUrl(forecast[i].weather_url)));
     }
     ui->line_chart->update();
 

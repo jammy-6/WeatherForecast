@@ -737,8 +737,7 @@ background-color:argb(255,255,255,0);</string>
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image:url(:/day/day/晴.png);
-background-color:argb(60,60,60,0);</string>
+     <string notr="true">background-color:argb(60,60,60,0);</string>
     </property>
     <property name="text">
      <string/>

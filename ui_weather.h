@@ -1,4 +1,4 @@
-/********************************************************************************
+﻿/********************************************************************************
 ** Form generated from reading UI file 'weather.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.2
@@ -511,7 +511,7 @@ public:
         type_icon->setObjectName(QString::fromUtf8("type_icon"));
         type_icon->setGeometry(QRect(230, 80, 101, 91));
         type_icon->setAutoFillBackground(false);
-        type_icon->setStyleSheet(QString::fromUtf8("border-image:url(:/day/day/\346\231\264.png);\n"
+        type_icon->setStyleSheet(QString::fromUtf8(
 "background-color:argb(60,60,60,0);"));
         label_9 = new QLabel(widget);
         label_9->setObjectName(QString::fromUtf8("label_9"));

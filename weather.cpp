@@ -26,7 +26,6 @@ Widget::Widget(QWidget *parent)
     //添加ui控件
     forecast_week_list << ui->datecn1 << ui->datecn2 << ui->datecn3 << ui->datecn4 << ui->datecn5 << ui->datecn6;
     forecast_date_list << ui->datenum1 << ui->datenum2 << ui->datenum3 << ui->datenum4 << ui->datenum5 << ui->datenum6;
-    forecast_aqi_list << ui->quality1 << ui->quality2 << ui->quality3 << ui->quality4 << ui->quality5 << ui->quality6;
     forecast_type_list << ui->type1 << ui->type2 << ui->type3 << ui->type4 << ui->type5 << ui->type6;
     forecast_typeIco_list << ui->typeicon1 << ui->typeicon2 << ui->typeicon3 << ui->typeicon4 << ui->typeicon5 << ui->typeicon6;
     forecast_high_list << ui->temperature_max1 << ui->temperature_max2 << ui->temperature_max3 << ui->temperature_max4 << ui->temperature_max5 << ui->temperature_max6;
@@ -35,9 +34,15 @@ Widget::Widget(QWidget *parent)
     // dateLb和WeekLb样式表设置
     for (int i = 0; i < 6; i++)
     {
-        forecast_date_list[i]->setStyleSheet("background-color: rgba(0, 255, 255, 100);");
-        forecast_week_list[i]->setStyleSheet("background-color: rgba(0, 255, 255, 100);");
+        forecast_date_list[i]->setStyleSheet("background-color: rgba(0, 191, 255, 100);");
+        forecast_week_list[i]->setStyleSheet("background-color: rgba(0, 191, 255, 100);");
+        forecast_type_list[i]->setStyleSheet("background-color: rgba(0, 191, 255, 100);");
+        forecast_high_list[i]->setStyleSheet("background-color: rgba(0, 191, 255, 100);");
+        forecast_low_list[i]->setStyleSheet ("background-color: rgba(0, 191, 255, 100);");
+        forecast_typeIco_list[i]->setStyleSheet("background-color: rgba(255, 255, 255, 90);");
+        forecast_typeIco_list[i]->setMinimumSize(100,100);
     }
+    ui->line_chart->setStyleSheet("background-color: rgba(192, 192, 192, 100);");
     WeatherTool tool;
 
     manager = new QNetworkAccessManager(this);
@@ -122,16 +127,25 @@ void Widget::paintSunSetUI(){
     //绘制底部直线以及圆弧
     QPainter painter;
     painter.setPen(Qt::yellow);
+    //设置绘画的起点为ui->sunarc控件
     painter.begin(ui->sunarc);
 
-    painter.drawLine(ui->sunarc->width()*0.1,ui->sunarc->height()*0.7,ui->sunarc->width()*0.9,ui->sunarc->height()*0.7);
+    painter.drawLine(ui->sunarc->width()*0.1,
+                     ui->sunarc->height()*0.7,
+                     ui->sunarc->width()*0.9,
+                     ui->sunarc->height()*0.7
+                     );
+
     QRect rect(ui->sunarc->width()*0.1,ui->sunarc->height()*0.72,ui->sunarc->width()*0.8,ui->sunarc->height()*0.28);
+
     QTime cur_time = QDateTime::currentDateTime().time();
     QTime sunrise = QTime::fromString(today.sunrise,"HH:mm");
     QTime sunset = QTime::fromString(today.sunset,"HH:mm");
-    painter.drawText(rect,Qt::AlignCenter,u8"日出日落");
-    painter.drawText(rect,Qt::AlignLeft,sunrise.toString("HH:mm"));
-    painter.drawText(rect,Qt::AlignRight,sunset.toString("HH:mm"));
+
+    painter.drawText(rect,Qt::AlignCenter|Qt::AlignVCenter,u8"日出日落");
+    painter.drawText(rect,Qt::AlignLeft|Qt::AlignVCenter,sunrise.toString("HH:mm"));
+    painter.drawText(rect,Qt::AlignRight|Qt::AlignVCenter,sunset.toString("HH:mm"));
+
     rect = QRect(ui->sunarc->width()*0.1, 0 ,ui->sunarc->width()*0.8,ui->sunarc->height()*1.4);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawArc(rect,0*16,180*16);
@@ -140,8 +154,16 @@ void Widget::paintSunSetUI(){
     int sunrise_total_minutes = sunrise.hour()*60+sunrise.minute();
     int cur_minutes = cur_time.hour()*60+cur_time.minute();
 
-    double start_angle = (sunset_total_minutes-cur_minutes)*1.0/(sunset_total_minutes-sunrise_total_minutes)*180 *16;
-    double span_angle = (cur_minutes-sunrise_total_minutes)*1.0/(sunset_total_minutes-sunrise_total_minutes)*180*16;
+    double start_angle;
+    double span_angle;
+    if(sunset_total_minutes<cur_minutes){
+        start_angle=0;
+        span_angle = 180*16;
+    }else{
+        start_angle = (sunset_total_minutes-cur_minutes)*1.0/(sunset_total_minutes-sunrise_total_minutes)*180 *16;
+        span_angle = (cur_minutes-sunrise_total_minutes)*1.0/(sunset_total_minutes-sunrise_total_minutes)*180*16;
+    }
+
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255, 85, 0, 100));
     painter.drawPie(rect,start_angle,span_angle);
@@ -226,20 +248,31 @@ void Widget::paintLineChart(){
         painter.setRenderHint(QPainter::Antialiasing);
         painter.setPen(Qt::yellow);
         painter.begin(ui->line_chart);
+        painter.translate(block_width/2,ui->line_chart->height()*0.1);
+
         //开始画图
-        QPoint prev_low(block_width/2,(1.0-((low_list[0]-min)/(max-min))) * ui->line_chart->height()*0.95);
-        QPoint prev_high(block_width/2,(1.0-((high_list[0]-min)/(max-min))) * ui->line_chart->height()*0.95);
+        QPoint prev_low(0 , (1.0-((low_list[0]-min)/(max-min))) * ui->line_chart->height()*0.8);
+        QPoint prev_high(0 , (1.0-((high_list[0]-min)/(max-min))) * ui->line_chart->height()*0.8);
         painter.setBrush(Qt::red);
+
+
+        QPen pen;
+        pen.setCapStyle(Qt::FlatCap);
+        painter.setPen(Qt::DashDotDotLine);
         painter.drawEllipse(prev_low, 2, 2);
         painter.drawEllipse(prev_high, 2, 2);
 
         for(int i=1;i<low_list.size();i++){
 
-            QPoint cur_low = QPoint(prev_low.x()+block_width,(1.0-((low_list[i]-min)/(max-min))) * ui->line_chart->height()*0.95);
+            QPoint cur_low = QPoint(prev_low.x()+block_width,(1.0-((low_list[i]-min)/(max-min))) * ui->line_chart->height()*0.8);
+
             painter.drawLine(prev_low,cur_low);
+
             prev_low=cur_low;
 
-            QPoint cur_high = QPoint(prev_high.x()+block_width,(1.0-((high_list[i]-min)/(max-min))+0.01) * ui->line_chart->height()*0.95);
+
+            QPoint cur_high = QPoint(prev_high.x()+block_width,(1.0-((high_list[i]-min)/(max-min))) * ui->line_chart->height()*0.8);
+
             painter.drawLine(prev_high,cur_high);
             prev_high=cur_high;
 

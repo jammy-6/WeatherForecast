@@ -25,14 +25,13 @@ Today & Today::operator=(const QJsonObject& jsonObj){
     QJsonObject aqi = jsonObj["aqi"].toObject();
     pm25 = aqi["pm2_5"].toString();
     quality = aqi["quality"].toString();
-    ganmao = aqi["aqiinfo"].toObject()["affect"].toString();
+    ganmao = jsonObj["index"].toArray().at(1).toObject()["detail"].toString();
     fx = jsonObj["winddirect"].toString();
     fl = jsonObj["windpower"].toString();
     type = jsonObj["weather"].toString();
     sunrise = jsonObj["daily"].toArray().at(0).toObject()["sunrise"].toString();
     sunset = jsonObj["daily"].toArray().at(0).toObject()["sunset"].toString();
-    notice = jsonObj["index"].toArray().at(1).toObject()["detail"].toString();
-    return *this;
+    notice = aqi["aqiinfo"].toObject()["affect"].toString();return *this;
 }
 
 Forecast::Forecast(){

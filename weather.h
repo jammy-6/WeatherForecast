@@ -25,6 +25,7 @@
 #include <QTimer>
 #include <QMutex>
 #include <functional>
+#include <QColor>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE

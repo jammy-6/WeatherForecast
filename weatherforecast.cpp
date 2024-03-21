@@ -23,7 +23,19 @@ WeatherForecast::WeatherForecast(QWidget *parent) :
     forecast_high_list << ui->temperature_max1 << ui->temperature_max2 << ui->temperature_max3 << ui->temperature_max4 << ui->temperature_max5 << ui->temperature_max6;
     forecast_low_list << ui->temperature_min1 << ui->temperature_min2 << ui->temperature_min3 << ui->temperature_min4 << ui->temperature_min5 << ui->temperature_min6;
 
+    //获取api秘钥
+    QString filepath= u8":/config.json";
+    QFile file(filepath);
+    if(file.open(QIODevice::ReadOnly|QIODevice::Text)){
+        QByteArray data = file.readAll();
+        file.close();
+        QJsonParseError error;
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(data,&error);
+        QJsonValue city_infos = jsonDoc[u8"Authorization"];
+        appCode = city_infos.toString();
+    }
 
+    //开始解析资源文件
     WeatherTool tool;
 
     manager = new QNetworkAccessManager(this);
@@ -198,7 +210,7 @@ void WeatherForecast::getWeatherInfo(){
 
     //获取今日天气信息
     QNetworkRequest request(today_url);
-    request.setRawHeader(u8"Authorization",u8"APPCODE 6ba0931b2d604deba881134ce9114fc5");
+    request.setRawHeader(u8"Authorization",appCode.toUtf8());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded; charset=utf-8");
     QByteArray requestBody = QString(u8"city="+city).toUtf8();
     manager->post(request,requestBody);

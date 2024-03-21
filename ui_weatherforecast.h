@@ -642,6 +642,7 @@ public:
         label_11 = new QLabel(gridLayoutWidget_4);
         label_11->setObjectName(QString::fromUtf8("label_11"));
         label_11->setMaximumSize(QSize(20, 16777215));
+        label_11->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);"));
 
         gridLayout_4->addWidget(label_11, 0, 0, 1, 1);
 
@@ -950,7 +951,7 @@ public:
         city_search->setText(QApplication::translate("WeatherForecast", "\345\237\216\345\270\202", nullptr));
         search_btn->setText(QString());
         refresh_btn->setText(QString());
-        label_11->setText(QApplication::translate("WeatherForecast", "<html><head/><body><p>\346\210\267<br/>\345\244\226<br/>\346\214\207<br/>\346\225\260</p></body></html>", nullptr));
+        label_11->setText(QApplication::translate("WeatherForecast", "<html><head/><body><p>\346\210\267<br/>\345\244\226<br/>\346\217\220<br/>\347\244\272</p></body></html>", nullptr));
         sunarc->setText(QString());
         label_5->setText(QApplication::translate("WeatherForecast", "\346\270\251\345\272\246", nullptr));
         label_6->setText(QApplication::translate("WeatherForecast", "\351\243\216\345\212\233", nullptr));

@@ -64,6 +64,7 @@ private:
     QAction *exit;
     QMutex mutex;
     //url请求数据
+    QString appCode;
     QNetworkAccessManager *manager;
     QNetworkAccessManager *image_manager[6];
     QString province;

@@ -2,7 +2,5 @@
     <qresource prefix="/weaUI">
         <file>weaUI.png</file>
     </qresource>
-    <qresource prefix="/">
-        <file>StockSnap_XX0FZY0UPY.jpg</file>
-    </qresource>
+    <qresource prefix="/"/>
 </RCC>

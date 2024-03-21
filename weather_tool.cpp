@@ -3,9 +3,8 @@
 
 WeatherTool::WeatherTool(){
     //开始解析资源文件
-    QString filepath = QCoreApplication::applicationDirPath();
-    filepath += u8"/city_info.json";
-    QFile file = QFile(filepath);
+    QString filepath= u8":/city_info.json";
+    QFile file(filepath);
     if(file.open(QIODevice::ReadOnly|QIODevice::Text)){
         QByteArray data = file.readAll();
         file.close();

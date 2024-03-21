@@ -26,6 +26,7 @@
 ```
 创建完毕后，在qtcreator中加入到file.qrc资源文件
 ![alt text](image-3.png)
+最后直接构建运行即可
 
 
 

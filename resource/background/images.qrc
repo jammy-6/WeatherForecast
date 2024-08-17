@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/weaUI">
+        <file>weaUI.png</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>

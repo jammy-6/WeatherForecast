@@ -51,7 +51,7 @@ WeatherForecast::WeatherForecast(QWidget *parent) :
     connect(manager,SIGNAL(finished(QNetworkReply*)),this,SLOT(parseRequest(QNetworkReply*)));
     today_url = u8"https://jisutqybmf.market.alicloudapi.com/weather/query";
     forecast_url = u8"https://jmweather.market.alicloudapi.com/weather/query/15d";
-    city=u8"广州";
+    city=u8"揭阳";
     getWeatherInfo();
 
     //安装事件过滤器

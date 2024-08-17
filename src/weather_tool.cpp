@@ -75,28 +75,28 @@ QString date2weekday(int dayOfWeekInt){
     QString dayOfWeekStr;
     switch (dayOfWeekInt) {
     case 1:
-        dayOfWeekStr = "Monday";
+        dayOfWeekStr = u8"周一";
         break;
     case 2:
-        dayOfWeekStr = "Tuesday";
+        dayOfWeekStr = u8"周二";
         break;
     case 3:
-        dayOfWeekStr = "Wednesday";
+        dayOfWeekStr = u8"周三";
         break;
     case 4:
-        dayOfWeekStr = "Thursday";
+        dayOfWeekStr = u8"周四";
         break;
     case 5:
-        dayOfWeekStr = "Friday";
+        dayOfWeekStr = u8"周五";
         break;
     case 6:
-        dayOfWeekStr = "Saturday";
+        dayOfWeekStr = u8"周六";
         break;
     case 7:
-        dayOfWeekStr = "Sunday";
+        dayOfWeekStr = u8"周日";
         break;
     default:
-        dayOfWeekStr = "Invalid";
+        dayOfWeekStr = u8"无效日期";
         break;
     }
     return dayOfWeekStr;

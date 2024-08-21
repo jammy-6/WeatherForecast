@@ -16,9 +16,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
 # They need to be set before the find_package(Qt5 ...) call.
 
-set(CMAKE_GENERATOR "MinGW Makefiles")
-# set(CMAKE_PREFIX_PATH "D:/Qt/Qt5.12.12/5.12.12/mingw73_64/lib/cmake")
-#set(Qt5_DIR /home/HZ/qt-5.12.5/lib)
+#set(CMAKE_GENERATOR "MinGW Makefiles")
+#set(CMAKE_PREFIX_PATH "D:/Program Files/Qt5.12.12/5.12.12/msvc2017_64")
+#set(Qt5_DIR "D:/Program Files/Qt5.12.12/5.12.12/msvc2017_64")
 find_package(Qt5 COMPONENTS Widgets Core Gui Network Charts REQUIRED)
 
 #添加qt包include头文件
@@ -31,7 +31,7 @@ include_directories(${Qt5Charts_INCLUDE_DIRS})
 
 MESSAGE("=================================================================")
 if(DEFINED Qt5_FOUND)
-
+	MESSAGE(STATUS "find Qt5_FOUND: ${Qt5_DIR}")
     MESSAGE(STATUS "find Qt5_FOUND: ${Qt5_FOUND}")
     MESSAGE(STATUS "Qt5Widgets_INCLUDE_DIRS: ${Qt5Widgets_INCLUDE_DIRS}")
     MESSAGE(STATUS "Qt5Gui_INCLUDE_DIRS: ${Qt5Gui_INCLUDE_DIRS}")

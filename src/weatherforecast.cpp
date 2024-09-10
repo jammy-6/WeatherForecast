@@ -6,6 +6,7 @@ WeatherForecast::WeatherForecast(QWidget *parent) :
     QFrame(parent),
     ui(new Ui::WeatherForecast)
 {
+    qDebug() << "ssl" << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::supportsSsl();
     ui->setupUi(this);
 
     //设置无边框

@@ -1,5 +1,29 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.3)
-PROJECT(weather_forecast VERSION 1.0 LANGUAGES CXX)
+PROJECT(WeatherForecast VERSION 1.0 LANGUAGES CXX)
+# 设置uic文件生成路径
+# set(CMAKE_AUTOUIC_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/generatefiles")
+# option(AUTOMOC_PATH_PREFIX ON)
+# set(CMAKE_AUTOMOC_PATH_PREFIX "-o${CMAKE_BINARY_DIR}/generatefiles")
+if(WIN32)
+	# 整理自动生成的文件
+	source_group("CMake Rules"  REGULAR_EXPRESSION "^$")
+    source_group("Generated Files" REGULAR_EXPRESSION "moc_.*|ui_.*|qrc_.*|mocs_.*")
+	source_group("Header Files" REGULAR_EXPRESSION ".h$")
+	source_group("Source Files" REGULAR_EXPRESSION ".cpp$")
+    source_group("Qrc Files"    REGULAR_EXPRESSION ".qrc$")
+    source_group("Ui Files"    REGULAR_EXPRESSION ".ui$")
+	source_group("zero"			REGULAR_EXPRESSION ".stamp$|.rule$")
+endif()
+#set(CMAKE_PREFIX_PATH "D:/Program Files/Qt5.12.12/5.12.12/mingw73_64")
+# message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}/generatefiles")
+# 设置moc文件生成路径
+# set(CMAKE_AUTOMOC_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/generatefiles")
+
+# 设置uic文件生成路径
+set(CMAKE_AUTOUIC_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/generatefiles")
+message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}/generatefiles")
+# 设置moc文件生成路径
+set(CMAKE_AUTOMOC_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/generatefiles")
 
 # Qt Quick程序中的QRC资源文件需要用rcc来进行预处理，生成相应.h和.cpp文件。
 # QObject派生的C++类也需要通过moc进行处理。这些都是编译系统中所谓的Rules。
@@ -7,6 +31,7 @@ PROJECT(weather_forecast VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+
 
 # 由于生成的C++文件都是放在编译目录里的（在Shadow Building中有别于源码目录），
 # 所以还需要将编译目录包含到Include目录，否则编译器会找不到这些头文件：
@@ -16,8 +41,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
 # They need to be set before the find_package(Qt5 ...) call.
 
-#set(CMAKE_GENERATOR "MinGW Makefiles")
-#set(CMAKE_PREFIX_PATH "D:/Program Files/Qt5.12.12/5.12.12/msvc2017_64")
 #set(Qt5_DIR "D:/Program Files/Qt5.12.12/5.12.12/msvc2017_64")
 find_package(Qt5 COMPONENTS Widgets Core Gui Network Charts REQUIRED)
 

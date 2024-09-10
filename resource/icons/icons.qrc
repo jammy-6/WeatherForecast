@@ -1,9 +1,9 @@
 <RCC>
-    <qresource prefix="/weatherIco">
-        <file>search.ico</file>
-        <file>location.ico</file>
-        <file>leaf.ico</file>
-        <file>refresh.ico</file>
-        <file>close.ico</file>
+    <qresource prefix="/weatherpng">
+        <file>search.png</file>
+		<file>location.png</file>
+        <file>leaf.png</file>
+        <file>refresh.png</file>
+        <file>close.png</file>
     </qresource>
 </RCC>

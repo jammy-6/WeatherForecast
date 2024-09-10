@@ -801,7 +801,7 @@ border-color:rgb(101, 255, 106);
      <widget class="QToolButton" name="search_btn">
       <property name="styleSheet">
        <string notr="true">
-border-image: url(:/weatherIco/search.ico);</string>
+border-image: url(:/weatherpng/search.png);</string>
       </property>
       <property name="text">
        <string/>
@@ -818,7 +818,7 @@ border-image: url(:/weatherIco/search.ico);</string>
      <widget class="QToolButton" name="refresh_btn">
       <property name="styleSheet">
        <string notr="true">QToolButton{
-	border-image: url(:/weatherIco/refresh.ico);
+	border-image: url(:/weatherpng/refresh.png);
 }
 QToolButton:hover{
 border-color:rgb(101, 255, 106); 
@@ -1127,7 +1127,7 @@ border-color:rgb(101, 255, 106);
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">image: url(:/weatherIco/leaf.ico);
+         <string notr="true">border-image: url(:/weatherpng/leaf.png);
 background-color:argb(255,255,255,0);</string>
         </property>
         <property name="text">
@@ -1310,7 +1310,7 @@ font: 16pt &quot;Microsoft YaHei UI&quot;;
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(:/weatherIco/location.ico);
+       <string notr="true">border-image: url(:/weatherpng/location.png);
 </string>
       </property>
       <property name="text">
